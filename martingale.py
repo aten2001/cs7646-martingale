@@ -248,7 +248,12 @@ def helper_methods(win_prob):
     ax.set_xlabel("Spin number")
     plt.savefig("question2.png")
 
-
+    # Q4
+    q4 = roulette_simulation(win_prob, 1000, max_spins=1000, bankRoll=256)
+    has_reach_goal = np.apply_along_axis(
+        lambda s: np.any(s == 80), 1, q4)
+    q4_probabilty = np.mean(has_reach_goal)
+    q5_expected_value = np.average(q4)
 
 
 def test_code():
@@ -256,11 +261,7 @@ def test_code():
     np.random.seed(gtid())  # do this only once
     experiment_1(win_prob)
     experiment_2(win_prob)
-    # Q4
-    q4 = roulette_simulation(win_prob, 1000, max_spins=1000, bankRoll=256)
-    has_reach_goal = np.apply_along_axis(
-        lambda s: np.any(s == 80), 1, q4)
-    q4_probabilty = np.mean(has_reach_goal)
+
     helper_methods(win_prob)
 
 
